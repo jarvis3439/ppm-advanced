@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,13 +21,13 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty(message = "Project name is required.")
+	@NotBlank(message = "Project name is required.")
 	private String projectName;
-	@NotEmpty(message = "Project Identifier is required.")
+	@NotBlank(message = "Project Identifier is required.")
 	@Size(min = 4, max = 5, message = "Please use 4 to 5 characters.")
 	@Column(updatable = false, unique = true)
 	private String projectIdentifier;
-	@NotEmpty(message = "Project description is required.")
+	@NotBlank(message = "Project description is required.")
 	private String description;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -114,13 +114,6 @@ public class Project {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
-	}
-
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectIdentifier=" + projectIdentifier + ", description=" + description
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + "]";
 	}
 
 }
