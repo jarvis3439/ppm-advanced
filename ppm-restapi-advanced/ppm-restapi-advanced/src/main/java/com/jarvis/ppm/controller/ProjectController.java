@@ -1,5 +1,7 @@
 package com.jarvis.ppm.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,11 @@ public class ProjectController {
 	public ResponseEntity<?> getProjectByIdentifier(@PathVariable String identifier) {
 		Project project = projectService.getProjectByIdentifier(identifier);
 		return new ResponseEntity<Project>(project, HttpStatus.FOUND);
+	}
+
+	// Get all projects
+	@GetMapping("/all")
+	public List<Project> getAllProjects() {
+		return projectService.findAllProjects();
 	}
 }

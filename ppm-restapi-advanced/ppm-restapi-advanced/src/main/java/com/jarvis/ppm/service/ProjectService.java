@@ -1,5 +1,7 @@
 package com.jarvis.ppm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,10 @@ public class ProjectService {
 			throw new ProjectNotFoundException("Project ID '" + identifier.toUpperCase() + "' doesn't exist.");
 		}
 		return project;
+	}
+
+	// Find All project
+	public List<Project> findAllProjects() {
+		return projectRepository.findAll();
 	}
 }
