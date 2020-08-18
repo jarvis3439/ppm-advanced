@@ -47,4 +47,11 @@ public class ProjectService {
 		projectRepository.delete(project);
 		;
 	}
+
+	/*
+	 * for updating project we don't need to do anything. JPA is smart enough that
+	 * when we pass database id while creating project it checks database that id
+	 * already exist or not. If it exist than instead of creating new project it
+	 * will update the project
+	 */
 }
