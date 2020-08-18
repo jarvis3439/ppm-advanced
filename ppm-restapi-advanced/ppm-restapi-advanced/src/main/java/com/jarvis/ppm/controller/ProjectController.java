@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +34,14 @@ public class ProjectController {
 		if (error != null) {
 			return error;
 		}
-
-		projectService.createOrUpdate(project);
+		projectService.createOrUpdateProject(project);
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
+	}
+
+	// get project by identifier
+	@GetMapping("/{identifier}")
+	public ResponseEntity<?> getProjectByIdentifier(@PathVariable String identifier) {
+		Project project = projectService.getProjectByIdentifier(identifier);
+		return new ResponseEntity<Project>(project, HttpStatus.FOUND);
 	}
 }
